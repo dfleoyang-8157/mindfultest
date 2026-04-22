@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci || npm install # 優先使用 ci，失敗則回退到 install
