@@ -1,8 +1,11 @@
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
 export async function generateGuidedMeditation(mood: string, duration: number) {
+  if (!process.env.GEMINI_API_KEY) {
+    return "請在 GitHub Secrets 中設定 VITE_GEMINI_API_KEY，以便啟用 AI 冥想功能。";
+  }
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
